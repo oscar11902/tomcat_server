@@ -48,7 +48,7 @@ public class DatabaseManager {
         System.out.println("User Account: " + rs.getString("userAccount") + ", User Name: " + rs.getString("userName") + ", Email: " + rs.getString("email") + ", Phone: " + rs.getString("phone"));
       }
       stmt.close();
-      conn.commit();
+      
       return true;
     } catch (SQLException e) {
       e.printStackTrace();
@@ -73,7 +73,7 @@ public class DatabaseManager {
 	      ResultSet rs = stmt.executeQuery();
 	      boolean login = rs.first();
 	      stmt.close();
-	      conn.commit();
+	      
 	      return login;
 	    } catch (SQLException e) {
 	      e.printStackTrace();
@@ -98,7 +98,7 @@ public class DatabaseManager {
       ResultSet rs = stmt.executeQuery();
       boolean valid = rs.first();
       stmt.close();
-      conn.commit();
+      
       return valid;
     } catch (SQLException e) {
       e.printStackTrace();
@@ -129,7 +129,7 @@ public class DatabaseManager {
         user.setPhone(rs.getString("phone"));
       }
       stmt.close();
-      conn.commit();
+      
       return user;
     } catch (SQLException e) {
       e.printStackTrace();
@@ -199,7 +199,7 @@ public class DatabaseManager {
 	        System.out.println("Organizer Account: " + rs.getString("organizerAccount") + ", Organizer Name: " + rs.getString("organizerName") + ", Email: " + rs.getString("email") + ", Phone: " + rs.getString("phone") + ", Principal: " + rs.getString("principal"));
 	      }
 	      stmt.close();
-	      conn.commit();
+	      
 	      return true;
 	    } catch (SQLException e) {
 	      e.printStackTrace();
@@ -224,7 +224,7 @@ public class DatabaseManager {
 	      ResultSet rs = stmt.executeQuery();
 	      boolean login = rs.first();
 	      stmt.close();
-	      conn.commit();
+	      
 	      return login;
 	    } catch (SQLException e) {
 	      e.printStackTrace();
@@ -248,7 +248,7 @@ public class DatabaseManager {
 	      ResultSet rs = stmt.executeQuery();
 	      boolean valid = rs.first();
 	      stmt.close();
-	      conn.commit();
+	      
 	      return valid;
 	    } catch (SQLException e) {
 	      e.printStackTrace();
@@ -280,7 +280,7 @@ public class DatabaseManager {
 	        organizer.setPrincipal(rs.getString("principal"));
 	      }
 	      stmt.close();
-	      conn.commit();
+	      
 	      return organizer;
 	    } catch (SQLException e) {
 	      e.printStackTrace();

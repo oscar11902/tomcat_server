@@ -3,8 +3,7 @@ package fcu.android.backend.data;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class User implements Serializable{
-  
+public class User implements Serializable{	
   private String userAccount;
   
   private String userName;
@@ -14,12 +13,12 @@ public class User implements Serializable{
   private String email;
   
   private String phone;
-
+  
   public String getUseraccount() {
 	    return userAccount;
 	  }
-  
-  public void setUserAccount(String userAccount) {
+
+public void setUserAccount(String userAccount) {
 	    this.userAccount = userAccount;
 	  }
   

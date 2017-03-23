@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class MySqlDatabase implements IDatabase {
   private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-  private static final String DB_CONNECTION = "jdbc:mysql://140.134.26.71:2560/beacon?useUnicode=true&characterEncoding=utf8";
+  private static final String DB_CONNECTION = "jdbc:mysql://140.134.26.71:2560/beacon?useUnicode=true&characterEncoding=utf8&verifyServerCertificate=false&useSSL=false";
   private static final String DB_USER = "server_user";
   private static final String DB_PASSWORD = "iecs1995";
    @Override
