@@ -8,8 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fcu.android.backend.data.User;
-import fcu.android.backend.data.organizer;
+import fcu.android.backend.data.*;
 
 public class DatabaseManager {
 
@@ -326,5 +325,94 @@ public class DatabaseManager {
 	    }
 	    return lsOrganizers;
 	  }
+	  
+	  public boolean addiBeacon(iBeacon iBeacon) {
+		    Connection conn = database.getConnection();
+		    PreparedStatement preStmt = null;
+		    Statement stmt = null;
+		    String sql = "INSERT INTO IBEACON(uuid ,major ,minor)  VALUES(? ,? ,?)";
+		    String query = "SELECT * FROM IBEACON";
+		    try {
+		      preStmt = conn.prepareStatement(sql);
+		      preStmt.setString(1, iBeacon.getUuid());
+		      preStmt.setString(2, iBeacon.getMajor());
+		      preStmt.setString(3, iBeacon.getMinor());
+		      preStmt.executeUpdate();
+		      preStmt.close();
+
+		      stmt = conn.createStatement();
+		      ResultSet rs = stmt.executeQuery(query);
+		      System.out.println("List All iBeacons");
+		      while (rs.next()) {
+		        System.out.println("uuid: " + rs.getString("uuid") + ", major: " + rs.getString("major") + ", minor: " + rs.getString("minor"));
+		      }
+		      stmt.close();
+		      
+		      return true;
+		    } catch (SQLException e) {
+		      e.printStackTrace();
+		    } finally {
+		      try {
+		        conn.close();
+		      } catch (SQLException e) {
+		        e.printStackTrace();
+		      }
+		    }
+		    return false;
+		  }
+	  
+	  public boolean cheakiniBeacon(String uuid, String major, String minor){
+		  Connection conn = database.getConnection();
+		  PreparedStatement stmt = null;
+		  String query = "SELECT * FROM IBEACON";
+		  try {
+		      stmt = conn.prepareStatement(query);
+		      stmt.setString(1, uuid);
+		      stmt.setString(2, major);
+		      stmt.setString(3, minor);
+		      ResultSet rs = stmt.executeQuery();
+		      boolean cheakin = rs.first();
+		      stmt.close();
+		      
+		      return cheakin;
+		    } catch (SQLException e) {
+		      e.printStackTrace();
+		    } finally {
+		      try {
+		        conn.close();
+		      } catch (SQLException e) {
+		        e.printStackTrace();
+		      }
+		    }
+		    return false;
+	  }
+	  
+	  public List<iBeacon> listAlliBeacons() {
+		    List<iBeacon> lsiBeacons = new ArrayList<iBeacon>();
+
+		    Connection conn = database.getConnection();
+		    String sql = "SELECT * FROM IBEACON";
+		    Statement stmt = null;
+
+		    try {
+		      stmt = conn.createStatement();
+		      ResultSet rs = stmt.executeQuery(sql);
+		      while (rs.next()) {
+		    	String uuid = rs.getString("uuid");
+		        String major = rs.getString("major");
+		        String minor = rs.getString("minor");
+		        
+		        iBeacon iBeacon = new iBeacon();
+		        iBeacon.setUuid(uuid);
+		        iBeacon.setMajor(major);
+		        iBeacon.setMinor(minor);
+		        lsiBeacons.add(iBeacon);
+		      }
+		    } catch (SQLException e) {
+		      e.printStackTrace();
+		    }
+		    return lsiBeacons;
+		  }
+		  
 
 }

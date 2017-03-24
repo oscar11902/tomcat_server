@@ -75,4 +75,24 @@ public class H2Database implements IDatabase {
 	    }
 	  }
   
+  private void createiBeaconTable() {
+	    Connection conn = getConnection();
+	    Statement stmt = null;
+	    try {
+	      stmt = conn.createStatement();
+	      stmt.execute("CREATE TABLE IBEACON(uuid varchar(255), major varchar(255), minor varchar(255) primary key)");   
+	      stmt.close();
+	      conn.commit();
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	    }
+	    finally {
+	      try {
+	        conn.close();
+	      } catch (SQLException e) {
+	        e.printStackTrace();
+	      }
+	    }
+	  }
+  
 }
