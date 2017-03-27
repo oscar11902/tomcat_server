@@ -11,7 +11,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import fcu.android.backend.data.User;
 import fcu.android.backend.data.iBeacon;
 import fcu.android.backend.db.DatabaseManager;
 
@@ -50,8 +49,8 @@ public class iBeaconService {
   @GET
   @Path("list")
   @Produces(MediaType.APPLICATION_JSON)
-  public List<iBeacon> listUsers() {
-    return dbManager.listAllibeacons();
+  public List<iBeacon> listiBeacons() {
+    return dbManager.listAlliBeacons();
   }
   
  

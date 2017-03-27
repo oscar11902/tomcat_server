@@ -330,7 +330,7 @@ public class DatabaseManager {
 		    Connection conn = database.getConnection();
 		    PreparedStatement preStmt = null;
 		    Statement stmt = null;
-		    String sql = "INSERT INTO IBEACON(uuid ,major ,minor)  VALUES(? ,? ,?)";
+		    String sql = "INSERT INTO IBEACON(Uuid ,Major ,Minor)  VALUES(? ,? ,?)";
 		    String query = "SELECT * FROM IBEACON";
 		    try {
 		      preStmt = conn.prepareStatement(sql);
