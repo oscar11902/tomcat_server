@@ -15,7 +15,8 @@ import fcu.android.backend.data.iBeacon;
 import fcu.android.backend.db.DatabaseManager;
 
 @Path("ibeacon/")
-public class iBeaconService {
+public class iBeaconService
+{
 
   private DatabaseManager dbManager = DatabaseManager.getInstance();
   
@@ -23,7 +24,8 @@ public class iBeaconService {
   @Path("register")
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   @Produces(MediaType.APPLICATION_JSON)
-  public iBeacon register(@FormParam("uuid") String uuid,@FormParam("major") String major, @FormParam("minor") String minor) {
+  public iBeacon register(@FormParam("uuid") String uuid, @FormParam("major") String major, @FormParam("minor") String minor)
+  {
 	iBeacon iBeacon = new iBeacon();
 	iBeacon.setUuid(uuid);
 	iBeacon.setMajor(major);
@@ -36,7 +38,9 @@ public class iBeaconService {
   @Path("cheakin")
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   @Produces(MediaType.APPLICATION_JSON)
-  public String cheakin(@FormParam("uuid") String uuid,@FormParam("major") String major, @FormParam("minor") String minor) {
+  public String cheakin(@FormParam("uuid") String uuid,@FormParam("major") String major,
+		  				@FormParam("minor") String minor)
+  {
     iBeacon iBeacon = new iBeacon();
     iBeacon.setUuid(uuid);
     iBeacon.setMajor(major);
@@ -49,10 +53,9 @@ public class iBeaconService {
   @GET
   @Path("list")
   @Produces(MediaType.APPLICATION_JSON)
-  public List<iBeacon> listiBeacons() {
+  public List<iBeacon> listiBeacons()
+  {
     return dbManager.listAlliBeacons();
   }
   
- 
-
 }

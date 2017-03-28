@@ -16,6 +16,7 @@ public class H2Database implements IDatabase {
     super();
     createUserTable();
     createOrganizerTable();
+    createiBeaconTable();
   }
 
   @Override
