@@ -20,16 +20,26 @@ public class iBeaconService
 
   private DatabaseManager dbManager = DatabaseManager.getInstance();
   
+  @GET
+  @Produces(MediaType.TEXT_PLAIN)
+  public String echo() {
+	  return "hello ibeacon";
+  }
+  
+  
   @POST
   @Path("register")
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   @Produces(MediaType.APPLICATION_JSON)
-  public iBeacon register(@FormParam("uuid") String uuid, @FormParam("major") String major, @FormParam("minor") String minor)
+  public iBeacon register(@FormParam("uuid") String uuid, @FormParam("major") String major, @FormParam("minor") String minor,
+		  				  @FormParam("location") String local)
   {
 	iBeacon iBeacon = new iBeacon();
 	iBeacon.setUuid(uuid);
 	iBeacon.setMajor(major);
 	iBeacon.setMinor(minor);
+	iBeacon.setLocal(local);
+	
     dbManager.addiBeacon(iBeacon);
     return iBeacon;
   }

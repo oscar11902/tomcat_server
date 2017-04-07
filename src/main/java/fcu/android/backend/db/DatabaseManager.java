@@ -330,13 +330,14 @@ public class DatabaseManager {
 		    Connection conn = database.getConnection();
 		    PreparedStatement preStmt = null;
 		    Statement stmt = null;
-		    String sql = "INSERT INTO IBEACON(Uuid ,Major ,Minor)  VALUES(? ,? ,?)";
+		    String sql = "INSERT INTO IBEACON(Uuid ,Major ,Minor)  VALUES(? ,? ,?, ?)";
 		    String query = "SELECT * FROM IBEACON";
 		    try {
 		      preStmt = conn.prepareStatement(sql);
 		      preStmt.setString(1, iBeacon.getUuid());
 		      preStmt.setString(2, iBeacon.getMajor());
 		      preStmt.setString(3, iBeacon.getMinor());
+		      preStmt.setString(4, iBeacon.getLocal());
 		      preStmt.executeUpdate();
 		      preStmt.close();
 
@@ -344,7 +345,7 @@ public class DatabaseManager {
 		      ResultSet rs = stmt.executeQuery(query);
 		      System.out.println("List All iBeacons");
 		      while (rs.next()) {
-		        System.out.println("uuid: " + rs.getString("uuid") + ", major: " + rs.getString("major") + ", minor: " + rs.getString("minor"));
+		        System.out.println("uuid: " + rs.getString("uuid") + ", major: " + rs.getString("major") + ", minor: " + rs.getString("minor") + ",local: " + rs.getString("local"));
 		      }
 		      stmt.close();
 		      
@@ -401,11 +402,13 @@ public class DatabaseManager {
 		    	String uuid = rs.getString("uuid");
 		        String major = rs.getString("major");
 		        String minor = rs.getString("minor");
+		        String local = rs.getString("local");
 		        
 		        iBeacon iBeacon = new iBeacon();
 		        iBeacon.setUuid(uuid);
 		        iBeacon.setMajor(major);
 		        iBeacon.setMinor(minor);
+		        iBeacon.setLocal(local);
 		        lsiBeacons.add(iBeacon);
 		      }
 		    } catch (SQLException e) {
