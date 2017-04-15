@@ -24,7 +24,7 @@ public class OrganizerService
   @Path("register")
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   @Produces(MediaType.APPLICATION_JSON)
-  public organizer register(@FormParam("organizerAccount") String organizerAccount,@FormParam("organizerName") String organizerName,
+  public boolean register(@FormParam("organizerAccount") String organizerAccount,@FormParam("organizerName") String organizerName,
 		  					@FormParam("password") String password,@FormParam("email") String email,@FormParam("phone") String phone,
 		  					@FormParam("principal") String principal)
   {
@@ -35,8 +35,8 @@ public class OrganizerService
     organizer.setEmail(email);
     organizer.setPhone(phone);
     organizer.setPrincipal(principal);
-    dbManager.addOrganizer(organizer);
-    return organizer;
+    
+    return dbManager.addOrganizer(organizer);
   }
   
   @POST
