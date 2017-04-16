@@ -24,16 +24,18 @@ public class UserService
   @Path("register")
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   @Produces(MediaType.APPLICATION_JSON)
-  public boolean register(@FormParam("userAccount") String userAccount,@FormParam("userName") String userName,
+  public String register(@FormParam("userAccount") String userAccount,@FormParam("userName") String userName,
 		  			   @FormParam("password") String password,@FormParam("email") String email,@FormParam("phone") String phone) 
   {
+	boolean regist=false;
     User user = new User();
     user.setUserAccount(userAccount);
     user.setUserName(userName);
     user.setPassword(password);
     user.setEmail(email);
     user.setPhone(phone);    
-    return dbManager.addUser(user);
+    regist = dbManager.addUser(user);
+    return String.valueOf(regist);
   }
   
   
