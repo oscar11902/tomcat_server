@@ -65,11 +65,11 @@ public class UserService
   }
 
   @GET
-  @Path("{email}")
+  @Path("{userAccount}")
   @Produces(MediaType.APPLICATION_JSON)
-  public User getUser(@PathParam("email") String email)
+  public User getUser(@PathParam("userAccount") String userAccount)
   {
-    return dbManager.getUser(email);
+    return dbManager.getUser(userAccount);
   }
 
   @GET

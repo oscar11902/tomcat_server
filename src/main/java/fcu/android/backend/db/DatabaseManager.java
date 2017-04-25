@@ -112,13 +112,13 @@ public class DatabaseManager {
     return false;
   }
 
-  public User getUser(String email) {
+  public User getUser(String userAccount) {
     Connection conn = database.getConnection();
     PreparedStatement stmt = null;
-    String query = "select * from USER where email = ?";
+    String query = "select * from USER where userAccount = ?";
     try {
       stmt = conn.prepareStatement(query);
-      stmt.setString(1, email);
+      stmt.setString(1, userAccount);
       ResultSet rs = stmt.executeQuery();
       User user = new User();
       if (rs.next()) {
@@ -262,13 +262,13 @@ public class DatabaseManager {
 	    return false;
 	  }
 
-	  public organizer getOrganizer(String email) {
+	  public organizer getOrganizer(String organizerAccount) {
 	    Connection conn = database.getConnection();
 	    PreparedStatement stmt = null;
-	    String query = "select * from ORGANIZER where email = ?";
+	    String query = "select * from ORGANIZER where organizerAccount = ?";
 	    try {
 	      stmt = conn.prepareStatement(query);
-	      stmt.setString(1, email);
+	      stmt.setString(1, organizerAccount);
 	      ResultSet rs = stmt.executeQuery();
 	      organizer organizer = new organizer();
 	      if (rs.next()) {
@@ -293,6 +293,8 @@ public class DatabaseManager {
 	    }
 	    return new organizer();
 	  }
+	  
+	  
 
 	  public List<organizer> listAllorganizer() {
 	    List<organizer> lsOrganizers = new ArrayList<organizer>();
@@ -324,8 +326,11 @@ public class DatabaseManager {
 	    } catch (SQLException e) {
 	      e.printStackTrace();
 	    }
+	    
 	    return lsOrganizers;
 	  }
+	  
+	  
 	  
 	  public boolean addiBeacon(iBeacon iBeacon) {
 		    Connection conn = database.getConnection();
@@ -363,6 +368,8 @@ public class DatabaseManager {
 		    return false;
 		  }
 	  
+	  
+	  
 	  public boolean cheakiniBeacon(String uuid, String major, String minor){
 		  Connection conn = database.getConnection();
 		  PreparedStatement stmt = null;
@@ -388,6 +395,37 @@ public class DatabaseManager {
 		    }
 		    return false;
 	  }
+	  
+	  public iBeacon getiBeacon(String uuid) {
+		    Connection conn = database.getConnection();
+		    PreparedStatement stmt = null;
+		    String query = "select * from iBeacon where uuid = ?";
+		    try {
+		      stmt = conn.prepareStatement(query);
+		      stmt.setString(1, uuid);
+		      ResultSet rs = stmt.executeQuery();
+		     iBeacon iBeacon = new iBeacon();
+		      if (rs.next()) {
+		    	iBeacon.setUuid(rs.getString("uuid"));
+		    	iBeacon.setMajor(rs.getString("major"));
+		    	iBeacon.setMinor(rs.getString("minor"));
+		    	iBeacon.setLocal(rs.getString("local"));
+		      }
+		      stmt.close();
+		      
+		      return iBeacon;
+		    } catch (SQLException e) {
+		      e.printStackTrace();
+		    } finally {
+		      try {
+		        conn.close();
+		      } catch (SQLException e) {
+		        e.printStackTrace();
+		      }
+		    }
+		    return new iBeacon();
+		  }
+
 	  
 	  public List<iBeacon> listAlliBeacons() {
 		    List<iBeacon> lsiBeacons = new ArrayList<iBeacon>();
@@ -417,6 +455,106 @@ public class DatabaseManager {
 		    }
 		    return lsiBeacons;
 		  }
+	  
+	  public boolean addSeminar(seminar seminar) {
+		    Connection conn = database.getConnection();
+		    PreparedStatement preStmt = null;
+		    Statement stmt = null;
+		    String sql = "INSERT INTO SEMINAR(name ,startDate ,endDate ,location ,introduction)  VALUES(? ,? ,? ,? ,?)";
+		    String query = "SELECT * FROM SEMINAR";
+		    try {
+		      preStmt = conn.prepareStatement(sql);
+		      preStmt.setString(1, seminar .getName());
+		      preStmt.setString(2, seminar .getStartDate());
+		      preStmt.setString(3, seminar .getEndDate());
+		      preStmt.setString(4, seminar .getLocation());
+		      preStmt.setString(5, seminar .getIntroduction());
+		      preStmt.executeUpdate();
+		      preStmt.close();
+
+		      stmt = conn.createStatement();
+		      ResultSet rs = stmt.executeQuery(query);
+		      System.out.println("List All seminars");
+		      while (rs.next()) {
+		        System.out.println("name: " + rs.getString("name") + ", startDate: " + rs.getString("startDate") + ", endDate: " + rs.getString("endDate") + ", location: " + rs.getString("location") + ", introduction" + rs.getString("introduction"));
+		      }
+		      stmt.close();
+		      
+		      return true;
+		    } catch (SQLException e) {
+		      e.printStackTrace();
+		    } finally {
+		      try {
+		        conn.close();
+		      } catch (SQLException e) {
+		        e.printStackTrace();
+		      }
+		    }
+		    return false;
+		  }
+	  
+	  public seminar getSeminar(String name) {
+		    Connection conn = database.getConnection();
+		    PreparedStatement stmt = null;
+		    String query = "select * from SEMINAR where name = ?";
+		    try {
+		      stmt = conn.prepareStatement(query);
+		      stmt.setString(1, name);
+		      ResultSet rs = stmt.executeQuery();
+		      seminar seminar = new seminar();
+		      if (rs.next()) {
+		    	  seminar.setName(rs.getString("name"));
+		    	  seminar.setStartDate(rs.getString("StartDate"));
+		    	  seminar.setEndDate(rs.getString("EndDate"));
+		    	  seminar.setLocation(rs.getString("Location"));
+		    	  seminar.setIntroduction(rs.getString("Introduction"));
+		      }
+		      stmt.close();
+		      
+		      return seminar;
+		    } catch (SQLException e) {
+		      e.printStackTrace();
+		    } finally {
+		      try {
+		        conn.close();
+		      } catch (SQLException e) {
+		        e.printStackTrace();
+		      }
+		    }
+		    return new seminar();
+		  }
+	  
+	  public List<seminar> listAllSeminars() {
+		    List<seminar> lsSeminars = new ArrayList<seminar>();
+
+		    Connection conn = database.getConnection();
+		    String sql = "SELECT * FROM SEMINAR";
+		    Statement stmt = null;
+
+		    try {
+		      stmt = conn.createStatement();
+		      ResultSet rs = stmt.executeQuery(sql);
+		      while (rs.next()) {
+		    	String name = rs.getString("name");
+		        String startDate = rs.getString("startDate");
+		        String endDate = rs.getString("endDate");
+		        String location = rs.getString("location");
+		        String introduction = rs.getString("introduction");
+		        
+		        seminar seminar = new seminar();
+		        seminar.setName(name);
+		        seminar.setStartDate(startDate);
+		        seminar.setEndDate(endDate);
+		        seminar.setLocation(location);
+		        seminar.setIntroduction(introduction);
+		        lsSeminars.add(seminar);
+		      }
+		    } catch (SQLException e) {
+		      e.printStackTrace();
+		    }
+		    return lsSeminars;
+		  }
+		  
 		  
 
 }

@@ -64,13 +64,13 @@ public class OrganizerService
   }
 
   @GET
-  @Path("{email}")
+  @Path("{organizerAccount}")
   @Produces(MediaType.APPLICATION_JSON)
-  public organizer getOrganizer(@PathParam("email") String email)
+  public organizer getOrganizer(@PathParam("organizerAccount") String organizerAccount)
   {
-    return dbManager.getOrganizer(email);
+    return dbManager.getOrganizer(organizerAccount);
   }
-
+  
   @GET
   @Path("list")
   @Produces(MediaType.APPLICATION_JSON)

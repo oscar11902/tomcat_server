@@ -61,6 +61,14 @@ public class iBeaconService
   
 
   @GET
+  @Path("{uuid}")
+  @Produces(MediaType.APPLICATION_JSON)
+  public iBeacon getiBeacon(@PathParam("uuid") String uuid)
+  {
+    return dbManager.getiBeacon(uuid);
+  }
+  
+  @GET
   @Path("list")
   @Produces(MediaType.APPLICATION_JSON)
   public List<iBeacon> listiBeacons()

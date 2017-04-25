@@ -17,6 +17,7 @@ public class H2Database implements IDatabase {
     createUserTable();
     createOrganizerTable();
     createiBeaconTable();
+    creatSeminarTable();
   }
 
   @Override
@@ -82,6 +83,26 @@ public class H2Database implements IDatabase {
 	    try {
 	      stmt = conn.createStatement();
 	      stmt.execute("CREATE TABLE IBEACON(uuid varchar(255), major varchar(255), minor varchar(255) primary key)");   
+	      stmt.close();
+	      conn.commit();
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	    }
+	    finally {
+	      try {
+	        conn.close();
+	      } catch (SQLException e) {
+	        e.printStackTrace();
+	      }
+	    }
+	  }
+  
+  private void creatSeminarTable() {
+	    Connection conn = getConnection();
+	    Statement stmt = null;
+	    try {
+	      stmt = conn.createStatement();
+	      stmt.execute("CREATE TABLE SEMINAR(name varchar(255), startDate varchar(255), endDate varchar(255), location varchar(255), introduction varchar(255) primary key)");   
 	      stmt.close();
 	      conn.commit();
 	    } catch (SQLException e) {
