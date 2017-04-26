@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class iBeacon implements Serializable{	
+	
   private String uuid;
 	
   private String major;
