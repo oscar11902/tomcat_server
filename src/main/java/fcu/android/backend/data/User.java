@@ -3,55 +3,65 @@ package fcu.android.backend.data;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class User implements Serializable{	
-  private String userAccount;
-  
-  private String userName;
-  
-  private String password;
-  
-  private String email;
-  
-  private String phone;
-  
-  public String getUseraccount() {
-	    return userAccount;
-	  }
+public class User implements Serializable {
+	private int UID;
+	
+	private String userAccount;
 
-public void setUserAccount(String userAccount) {
-	    this.userAccount = userAccount;
-	  }
-  
-  public String getUserName() {
-    return userName;
-  }
+	private String userName;
 
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
+	private String password;
 
-  public String getPassword() {
-    return password;
-  }
+	private String email;
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+	private String phone;
 
-  public String getEmail() {
-    return email;
-  }
+	public String getUseraccount() {
+		return userAccount;
+	}
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
-  
-  public String getPhone() {
-	    return phone;
-	  }
-  
-  public void setPhone(String phone) {
-	    this.phone = phone;
-	  }
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public int getUID() {
+		return UID;
+	}
+
+	public void setUID(int uID) {
+		UID = uID;
+	}
 
 }
