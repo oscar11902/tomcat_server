@@ -185,7 +185,7 @@ public class DatabaseManager {
 		String query = "SELECT * FROM ORGANIZER";
 		try {
 			preStmt = conn.prepareStatement(sql);
-			preStmt.setString(1, organizer.getOranizerAccount());
+			preStmt.setString(1, organizer.getOrganizerAccount());
 			preStmt.setString(2, organizer.getPassword());
 			preStmt.setString(3, organizer.getOrganizerName());
 			preStmt.setString(4, organizer.getEmail());

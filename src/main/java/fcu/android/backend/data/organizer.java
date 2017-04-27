@@ -18,14 +18,7 @@ public class organizer implements Serializable {
 
 	private String phone;
 
-	public String getOranizerAccount() {
-		return organizerAccount;
-	}
-
-	public void setOrganizerAccount(String organizerAccount) {
-		this.organizerAccount = organizerAccount;
-	}
-
+	
 	public String getOrganizerName() {
 		return organizerName;
 	}
@@ -76,6 +69,10 @@ public class organizer implements Serializable {
 
 	public String getOrganizerAccount() {
 		return organizerAccount;
+	}
+
+	public void setOrganizerAccount(String organizerAccount) {
+		this.organizerAccount = organizerAccount;
 	}
 
 }
